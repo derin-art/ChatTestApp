@@ -5,8 +5,7 @@ import {
   HistoryRouterProps,
   redirect,
 } from "react-router-dom";
-export default function Home() {
-  const [userName, setUserName] = useState("");
+export default function Home({ userName, setUserName }) {
   return (
     <div>
       <div className="bg-gray-100 w-screen h-screen text-4xl flex items-center justify-center">

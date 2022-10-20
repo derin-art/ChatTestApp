@@ -2,7 +2,7 @@ import ChatFooter from "./ChatFooter";
 import ChatBody from "./ChatBody";
 import { useState, useEffect } from "react";
 
-export default function ChatPage({ socket }) {
+export default function ChatPage({ socket, userName }) {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -11,7 +11,7 @@ export default function ChatPage({ socket }) {
   return (
     <div>
       <ChatBody socket={socket} messages={messages}></ChatBody>
-      <ChatFooter socket={socket}></ChatFooter>
+      <ChatFooter socket={socket} userName={userName}></ChatFooter>
     </div>
   );
 }

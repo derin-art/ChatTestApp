@@ -1,10 +1,11 @@
 import { useState } from "react";
 
-export default function ChatFooter({ socket }) {
+export default function ChatFooter({ socket, userName }) {
   const [message, setMessage] = useState("");
   const handleClick = () => {
     socket.emit("message", {
       text: message,
+      sender: userName,
       id: `${socket.id}${Math.random()}`,
       socketID: socket.id,
     });
