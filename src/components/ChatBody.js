@@ -1,4 +1,9 @@
-export default function ChatBody({ socket, messages, previousMessages }) {
+export default function ChatBody({
+  socket,
+  messages,
+  previousMessages,
+  userName,
+}) {
   console.log("sd", previousMessages);
   return (
     <div>
