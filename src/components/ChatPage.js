@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 export default function ChatPage({ socket, userName }) {
   const [messages, setMessages] = useState([]);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(5);
 
   useEffect(() => {
     socket.on("messageResponse", (data) => setMessages([...messages, data]));
@@ -17,22 +17,30 @@ export default function ChatPage({ socket, userName }) {
 
   const onScroll = (e) => {
     console.log("sr", e.target.scrollTop);
+    if (e.target.scrollTop === 0) {
+      setPage(page + 10);
+      setPreviousRenderedMessages(previousMessages.slice(0, page));
+    }
   };
+
+  const [previousRenderedMessages, setPreviousRenderedMessages] = useState(
+    previousMessages ? previousMessages.slice(0, page) : []
+  );
 
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen">
       <div className="border w-96 relative h-fit">
         {" "}
-        <div className="h-32 overflow-auto" onScroll={onScroll}>
+        <div className="h-96 overflow-auto" onScroll={onScroll}>
           {" "}
           <ChatBody
             userName={userName}
             socket={socket}
             messages={messages}
-            previousMessages={previousMessages}
+            previousMessages={previousRenderedMessages}
           ></ChatBody>
         </div>
-        <div className="absolute bottom-0 w-full bg-white">
+        <div className="absolute -bottom-20 w-full bg-white">
           {" "}
           <ChatFooter socket={socket} userName={userName}></ChatFooter>
         </div>

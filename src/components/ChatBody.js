@@ -20,16 +20,39 @@ export default function ChatBody({
   }, [messagesRef, messages]);
 
   return (
-    <div>
-      {previousMessages.map((item) => {
-        return <div key={item._id}>{item.text}</div>;
-      })}
-      <div ref={messagesRef}>
-        {messages.map((item) => {
+    <div className="h-96 overflow-auto">
+      <div className="flex flex-col">
+        {previousMessages.map((item) => {
+          const author = item.sender === userName;
           return (
-            <div key={item.id}>
-              {item.text}
-              {item.sender}
+            <div className={`w-full  mb-2 flex ${author ? "justify-end" : ""}`}>
+              <div
+                key={item.id}
+                className={` text-white p-2 w-fit ${
+                  author ? " bg-green-300" : "bg-green-400 justify-end"
+                }`}
+              >
+                {item.sender[0]}
+                {item.text}
+              </div>
+            </div>
+          );
+        })}
+      </div>{" "}
+      <div ref={messagesRef} className="flex flex-col">
+        {messages.map((item) => {
+          const author = item.sender === userName;
+          return (
+            <div className={`w-full mb-2 flex ${author ? "justify-end" : ""}`}>
+              <div
+                key={item.id}
+                className={` text-white p-2 w-fit ${
+                  author ? "bg-green-300 " : "bg-green-400 "
+                }`}
+              >
+                {item.sender[0]}
+                {item.text}
+              </div>
             </div>
           );
         })}
