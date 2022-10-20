@@ -1,6 +1,9 @@
-export default function ChatBody({ socket }) {
-  useEffect(() => {
-    socket.on("messageResponse", (data) => setMessages([...messages, data]));
-  }, [socket, messages]);
-  return <div></div>;
+export default function ChatBody({ socket, messages }) {
+  return (
+    <div>
+      {messages.map((item) => {
+        return <div>{item.text}</div>;
+      })}
+    </div>
+  );
 }
