@@ -13,12 +13,14 @@ export default function ChatFooter({ socket, userName }) {
     minute: "2-digit",
   });
   const handleClick = () => {
+    const id = uuidv4();
     socket.emit("message", {
       text: message,
       sender: userName,
       date: dateSent,
       id: `${socket.id}${Math.random()}`,
       socketID: socket.id,
+      _id: id,
     });
     const previousMessages = localStorage.getItem("chats");
     if (previousMessages) {
@@ -30,7 +32,7 @@ export default function ChatFooter({ socket, userName }) {
         text: message,
         sender: userName,
         date: dateSent,
-        _id: uuidv4(),
+        _id: id,
       });
       localStorage.setItem("chats", JSON.stringify(finalArra));
     } else {
@@ -41,7 +43,7 @@ export default function ChatFooter({ socket, userName }) {
             text: message,
             sender: userName,
             date: dateSent,
-            _id: uuidv4(),
+            _id: id,
           },
         ])
       );
