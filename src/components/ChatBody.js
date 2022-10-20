@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function ChatBody({
   socket,
   messages,
@@ -5,19 +7,33 @@ export default function ChatBody({
   userName,
 }) {
   console.log("sd", previousMessages);
+  const messagesRef = React.useRef(null);
+  const scrollToBottom = () => {
+    messagesRef.current.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
+  React.useEffect(() => {
+    if (messagesRef.current) {
+      scrollToBottom();
+    }
+  }, [messagesRef, messages]);
+
   return (
     <div>
       {previousMessages.map((item) => {
         return <div key={item._id}>{item.text}</div>;
       })}
-      {messages.map((item) => {
-        return (
-          <div key={item.id}>
-            {item.text}
-            {item.sender}
-          </div>
-        );
-      })}
+      <div ref={messagesRef}>
+        {messages.map((item) => {
+          return (
+            <div key={item.id}>
+              {item.text}
+              {item.sender}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

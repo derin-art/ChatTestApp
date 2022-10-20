@@ -1,8 +1,10 @@
 import e from "cors";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 export default function ChatFooter({ socket, userName }) {
+  let inputBox = null;
+  let messageEnd = null;
   const [message, setMessage] = useState("");
   const date = new Date();
   const dateSent = date.toLocaleTimeString([], {
@@ -49,13 +51,15 @@ export default function ChatFooter({ socket, userName }) {
       );
     }
   };
+
   return (
-    <div>
-      <input
+    <div className="w-full border flex p-2">
+      <textarea
         onChange={(e) => {
           setMessage(e.target.value);
         }}
-      ></input>
+        className="w-full"
+      ></textarea>
       <button
         onClick={() => {
           handleClick();
