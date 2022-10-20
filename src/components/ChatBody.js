@@ -1,4 +1,5 @@
 import React from "react";
+import ReactTooltip from "react-tooltip";
 
 export default function ChatBody({
   socket,
@@ -25,15 +26,31 @@ export default function ChatBody({
         {previousMessages.map((item) => {
           const author = item.sender === userName;
           return (
-            <div className={`w-full  mb-2 flex ${author ? "justify-end" : ""}`}>
+            <div className={`w-full mb-2 flex  ${author ? "justify-end" : ""}`}>
               <div
                 key={item.id}
-                className={` text-white p-2 w-fit ${
-                  author ? " bg-green-300" : "bg-green-400 justify-end"
+                className={` text-white p-2 w-fit flex ${
+                  author ? "flex-row-reverse" : ""
                 }`}
               >
-                {item.sender[0]}
-                {item.text}
+                <div
+                  data-tip
+                  data-for="registerTip"
+                  className="text-green-500 flex items-center justify-center w-6 h-6 font-mono text-sm bg-gray-800  rounded-full"
+                >
+                  {" "}
+                  {item.sender[0].toUpperCase()}
+                </div>
+                <div
+                  className={` ${
+                    author
+                      ? "bg-green-800 mr-2 rounded-l rounded-b"
+                      : "bg-green-400 ml-2  rounded-r rounded-b"
+                  } p-2`}
+                >
+                  {" "}
+                  {item.text}
+                </div>
               </div>
             </div>
           );
@@ -43,15 +60,31 @@ export default function ChatBody({
         {messages.map((item) => {
           const author = item.sender === userName;
           return (
-            <div className={`w-full mb-2 flex ${author ? "justify-end" : ""}`}>
+            <div className={`w-full mb-2 flex  ${author ? "justify-end" : ""}`}>
               <div
                 key={item.id}
-                className={` text-white p-2 w-fit ${
-                  author ? "bg-green-300 " : "bg-green-400 "
+                className={` text-white p-2 w-fit flex ${
+                  author ? "flex-row-reverse" : ""
                 }`}
               >
-                {item.sender[0]}
-                {item.text}
+                <div
+                  data-tip
+                  data-for="registerTip"
+                  className="text-green-500 flex items-center justify-center w-6 h-6 font-mono text-sm bg-gray-800  rounded-full"
+                >
+                  {" "}
+                  {item.sender[0].toUpperCase()}
+                </div>
+                <div
+                  className={` ${
+                    author
+                      ? "bg-green-800 mr-2 rounded-l rounded-b"
+                      : "bg-green-400 ml-2  rounded-r rounded-b"
+                  } p-2`}
+                >
+                  {" "}
+                  {item.text}
+                </div>
               </div>
             </div>
           );

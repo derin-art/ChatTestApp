@@ -29,9 +29,9 @@ export default function ChatPage({ socket, userName }) {
 
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen">
-      <div className="border w-96 relative h-fit">
+      <div className="border w-96 relative h-[500px] rounded p-4">
         {" "}
-        <div className="h-96 overflow-auto" onScroll={onScroll}>
+        <div className="" onScroll={onScroll}>
           {" "}
           <ChatBody
             userName={userName}
@@ -40,9 +40,13 @@ export default function ChatPage({ socket, userName }) {
             previousMessages={previousRenderedMessages}
           ></ChatBody>
         </div>
-        <div className="absolute -bottom-20 w-full bg-white">
+        <div className="absolute bottom-4 w-full bg-white  left-0 border-t pt-4">
           {" "}
-          <ChatFooter socket={socket} userName={userName}></ChatFooter>
+          <div className="w-full flex  items-center justify-center">
+            <div className="w-[300px] ">
+              <ChatFooter socket={socket} userName={userName}></ChatFooter>
+            </div>
+          </div>
         </div>
       </div>
     </div>
