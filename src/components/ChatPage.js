@@ -8,9 +8,19 @@ export default function ChatPage({ socket, userName }) {
   useEffect(() => {
     socket.on("messageResponse", (data) => setMessages([...messages, data]));
   }, [socket, messages]);
+  let previousMessages;
+
+  if (localStorage.getItem("chats")) {
+    previousMessages = JSON.parse(localStorage.getItem("chats"));
+  }
+
   return (
     <div>
-      <ChatBody socket={socket} messages={messages}></ChatBody>
+      <ChatBody
+        socket={socket}
+        messages={messages}
+        previousMessages={previousMessages}
+      ></ChatBody>
       <ChatFooter socket={socket} userName={userName}></ChatFooter>
     </div>
   );
