@@ -2,7 +2,11 @@ import e from "cors";
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-export default function ChatFooter({ socket, userName }) {
+export default function ChatFooter({
+  socket,
+  userName,
+  setPreviousRenderedMessages,
+}) {
   const sendIcon = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -49,6 +53,7 @@ export default function ChatFooter({ socket, userName }) {
         _id: id,
       });
       localStorage.setItem("chats", JSON.stringify(finalArra));
+      setPreviousRenderedMessages(finalArra.slice(0, 10));
     } else {
       localStorage.setItem(
         "chats",
@@ -62,6 +67,7 @@ export default function ChatFooter({ socket, userName }) {
         ])
       );
     }
+
     setMessage("");
   };
 

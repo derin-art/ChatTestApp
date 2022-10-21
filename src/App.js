@@ -24,7 +24,13 @@ function App() {
         ></Route>
         <Route
           path="/chat"
-          element={<ChatPage socket={socket} userName={userName}></ChatPage>}
+          element={
+            <ChatPage
+              socket={socket}
+              userName={userName}
+              setUserName={setUserName}
+            ></ChatPage>
+          }
         ></Route>
       </Routes>
     </BrowserRouter>
