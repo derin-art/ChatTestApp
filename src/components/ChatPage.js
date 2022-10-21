@@ -44,7 +44,6 @@ export default function ChatPage({ socket, userName, setUserName }) {
             userName={userName}
             socket={socket}
             messages={messages}
-            previousMessages={previousMessages}
           ></ChatBody>
         </div>
         <div className="absolute bottom-4 w-full bg-white  left-0 border-t pt-4">
