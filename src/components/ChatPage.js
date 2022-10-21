@@ -7,8 +7,6 @@ export default function ChatPage({ socket, userName, setUserName }) {
   const [messages, setMessages] = useState([]);
   const [page, setPage] = useState(5);
 
-  console.log(page);
-
   useEffect(() => {
     socket.on("messageResponse", (data) => setMessages([...messages, data]));
   }, [socket, messages]);
@@ -17,14 +15,6 @@ export default function ChatPage({ socket, userName, setUserName }) {
   if (localStorage.getItem("chats")) {
     previousMessages = JSON.parse(localStorage.getItem("chats"));
   }
-
-  const onScroll = (e) => {
-    console.log("sr", e.target.scrollTop);
-    if (e.target.scrollTop === 0) {
-      setPage(page + 5);
-      setPreviousRenderedMessages(previousMessages.reverse().slice(0, page));
-    }
-  };
 
   const [previousRenderedMessages, setPreviousRenderedMessages] = useState(
     previousMessages ? previousMessages.reverse().slice(0, page) : []
@@ -44,10 +34,12 @@ export default function ChatPage({ socket, userName, setUserName }) {
       </button>
       <div className="border w-96 relative h-[500px] rounded p-4">
         {" "}
+        <div className="absolute top-0 left-1 text-xs">
+          scroll to the top to reveal more messages
+        </div>
         <div className="">
           {" "}
           <ChatBody
-            onScroll={onScroll}
             setPage={setPage}
             userName={userName}
             socket={socket}
