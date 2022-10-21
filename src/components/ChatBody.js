@@ -21,10 +21,7 @@ export default function ChatBody({ previousMessages, userName }) {
 
   const [pageNo, setPageNo] = useState(25);
 
-  console.log("sdsd", previousMessages);
-
   const divOnScroll = (e) => {
-    console.log("sr", e.target.scrollTop);
     if (e.target.scrollTop === 0) {
       setPageNo((prev) => prev + 25);
     }
