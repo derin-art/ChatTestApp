@@ -53,7 +53,6 @@ export default function ChatFooter({
         _id: id,
       });
       localStorage.setItem("chats", JSON.stringify(finalArra));
-      setPreviousRenderedMessages(finalArra.slice(0, 10));
     } else {
       localStorage.setItem(
         "chats",
